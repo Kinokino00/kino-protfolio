@@ -22,13 +22,6 @@
       </div>
     </div>
 
-    <DataTable :value="products" tableStyle="min-width: 50rem">
-        <Column field="code" header="Code"></Column>
-        <Column field="name" header="Name"></Column>
-        <Column field="category" header="Category"></Column>
-        <Column field="quantity" header="Quantity"></Column>
-    </DataTable>
-
     <div class="flex gap-1">primary
       <div class="w-20 h-20 bg-primary-50">50</div>
       <div class="w-20 h-20 bg-primary-100">100</div>
@@ -72,18 +65,6 @@
 
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
-import DataTable from 'primevue/datatable'
-import Column from 'primevue/column'
-import { ProductService } from '@/views/ProductService'
-
-onMounted(() => {
-  ProductService.getProductsMini().then((data) => (products.value = data))
-})
-
-const products = ref()
-
-
 const changeTheme = (theme: string) => document.querySelector("html")?.setAttribute("data-theme", theme)
 
 const item = [
