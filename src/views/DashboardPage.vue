@@ -6,7 +6,6 @@
 
         <div v-if="menuItems[0].active" class="area area-work">
           <div class="area-line"></div>
-
           <div class="area-info" v-for="info in certificateItem" :key="info.ad">
             <p class="font-num min-w-[50px] text-end">
               <span class="number">{{ info.tenureYear }}</span>y
@@ -26,7 +25,6 @@
 
         <div v-if="menuItems[1].active" class="area area-certificate">
           <div class="area-line"></div>
-
           <div class="area-info">
             <p class="area-info-label min-w-[88px]">Certificate</p>
             <div class="circle"></div>
@@ -40,27 +38,47 @@
           </div>
         </div>
 
-        <!-- <div v-if="menuItems[2].active" class="area area-skill"> -->
-        <div class="area area-skill">
+        <div v-if="menuItems[2].active" class="area area-skill">
           <div class="area-line"></div>
-
           <div class="area-info" v-for="skills in skillItem" :key="skills.label">
             <p class="area-info-label">{{ skills.label }}</p>
             <div class="circle"></div>
-            <div class="grid gap-4">
+            <div class="grid gap-3">
               <div class="area-info-detail" v-for="(skill,i) in skills.text" :key="i">
                 <i :class="skill"></i>
-                <p class="text-lg">{{ skill }}</p>
+                <p>{{ skill }}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div v-if="menuItems[3].active" class="area area-project"></div>
+        <div v-if="menuItems[3].active" class="area area-project">
+          <div class="area-line"></div>
+          <div class="area-info" v-for="projects in projectItem" :key="projects.label">
+            <p class="area-info-label">{{ projects.label }}</p>
+            <div class="circle"></div>
+            <div class="grid gap-3">
+              <div class="area-info-detail" v-for="(project,i) in projects.text" :key="i">
+                <p v-if="project.year" class="font-num">{{ project.year }}</p>
+                <p class="text-base">{{ project.name }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div v-if="menuItems[4].active" class="area area-about"></div>
+        <div v-if="menuItems[4].active" class="area area-about">
+          <p>
+            　　具備一年Python學習背景，會使用Django框架及Selenium、BeautifulSoup套件，懂資料庫基本操作，已取得TQC大數據分析專業人才證照。<br><br>
 
-        <!-- <div v-if="allActive" class="photo-bg-kino"></div> -->
+            　　於前端專案中負責API串接，使用Vue3框架、TypeScript、Tailwindcss和Scss。此前參與了多個APP和Web專案的UI設計。<br><br>
+
+            　　於擔任營業處督導期間，負責行銷企劃、規劃執行、人員管理與溝通協作，這些經驗培養了我良好的團隊合作和溝通能力。擅長跨部門協作，能有效地與團隊成員合作，達成專案目標。<br><br>
+
+            　　我性格謙和、樂觀且活潑，致力於成為一名圓融通達的專業人才。
+          </p>
+        </div>
+
+        <div v-if="allActive" class="photo-bg-kino"></div>
       </div>
     </div>
     <div class="title-menu">
@@ -146,19 +164,59 @@ const skillItem = ref([
     label: 'Back-end',
     text: [
       'Python', 'django', 'Selenium', 'BeautifulSoup'
-    ],
+    ]
+  }, {
+    label: 'Front-end',
+    text: [
+      'HTML', 'CSS', 'Vue', 'Javascript', 'Typescript'
+    ]
+  }, {
+    label: 'UI Designer',
+    text: [
+      'Figma'
+    ]
+  }, {
+    label: 'Graphic Designer',
+    text: [
+      'Illustrator', 'Photoshop'
+    ]
   },
-  // {
-  //   label: 'Front-end',
-  //   text: [
-  //     'Python', 'django', 'Selenium', 'BeautifulSoup'
-  //   ],
-  // },
+])
+
+const projectItem = ref([
+  {
+    label: 'Back-end',
+    text: [{ name: 'Meet Food' }]
+  }, {
+    label: 'Front-end',
+    text: [{
+        year: 2024,
+        name: '能源管理系統'
+      }, {
+        year: 2021,
+        name: '龍奉宮'
+      }, {
+        year: 2020,
+        name: '台灣新計畫有限公司'
+    }]
+  }, {
+    label: 'Front-end & UI',
+    text: [{
+        year: 2022,
+        name: '樺晟科技股份有限公司'
+      }, {
+        year: 2022,
+        name: 'Ttoper'
+    }]
+  },
 ])
 </script>
 
 
 <style lang="scss" scoped>
+p {
+  @apply text-xs md:text-sm;
+}
 .border {
   &-color {
     @apply border-white/15;
@@ -174,7 +232,7 @@ const skillItem = ref([
 }
 .photo-bg {
   @apply transition-all overflow-hidden;
-  @apply w-[34vw] md:w-[23vw] xl:w-[27vw] 2xl:w-[23.5vw];
+  @apply w-[100vw] sm:w-[60vw] md:w-[48vw] lg:w-[40vw] xl:w-[34vw] 2xl:w-[30vw] 3xl:w-[26vw];
 
   &-inner {
     @apply relative grid items-center justify-center;
@@ -210,7 +268,7 @@ const skillItem = ref([
       @apply flex flex-col gap-1;
     }
     &-label {
-      @apply relative text-lg text-end font-bold;
+      @apply relative text-base text-end font-bold md:text-lg;
     }
   }
 
@@ -226,35 +284,41 @@ const skillItem = ref([
   }
 
   &-certificate {
+    @apply whitespace-nowrap;
     .area-line {
-      @apply top-6 left-[143px];
+      @apply top-10 left-[146px];
     }
     .circle, .area-info-label {
-      @apply -top-4;
+      @apply -top-7;
     }
   }
 
   &-skill {
-    @apply gap-8;
-    .circle {
-      @apply top-0;
+    @apply gap-3 md:gap-8;
+    .circle, .area-info-label {
+      @apply -top-3;
     }
     .area {
       &-line {
-        @apply top-0 left-[176px];
+        @apply top-5 left-[142px] md:left-[206px];
       }
       &-info {
+        &:nth-last-of-type(2), &:nth-last-of-type(1) {
+          .area-info-label {
+            @apply -top-5;
+          }
+        }
         &-label {
-          @apply min-w-[120px];
+          @apply max-w-[88px] min-w-[88px] md:min-w-[152px];
         }
         &-detail {
           @apply flex-row items-center gap-1;
           i {
-            @apply w-9 h-9;
-            $skills: 'Python', 'django', 'Selenium', 'BeautifulSoup';
+            @apply w-6 h-6 md:w-9 md:h-9 bg-no-repeat bg-center bg-contain;
+            $skills: 'Python', 'django', 'Selenium', 'BeautifulSoup','HTML', 'CSS', 'Vue', 'Javascript', 'Typescript', 'Figma', 'Illustrator', 'Photoshop';
             @each $skill in $skills {
               &.#{$skill} {
-                background-image: url('@/assets/images/#{$skill}.png');
+                background-image: url('@/assets/images/icon/#{$skill}.png');
               }
             }
             &.BeautifulSoup {
@@ -266,15 +330,28 @@ const skillItem = ref([
     }
   }
 
-  &-project {}
+  &-project {
+    .area {
+      &-line {
+        @apply top-5 left-[186px];
+      }
+      &-info {
+        &-label {
+          @apply min-w-[130px];
+        }
+      }
+    }
+  }
 
-  &-about {}
+  &-about {
+    mask-image: none;
+  }
 }
 
 .title-menu {
   @apply relative flex flex-col transition-all;
   @apply mr-4      sm:mr-4      md:mr-10;
-  @apply mt-[8vh]               md:mt-[10vh] xl:mt-[15vh] 2xl:mt-[20vh];
+  @apply mt-[4vh]               md:mt-[10vh] xl:mt-[15vh] 2xl:mt-[20vh];
   @apply mb-[10vh] sm:mb-[10vh] md:mb-[21vh] xl:mb-[18vh] 2xl:mb-[24vh];
 }
 .title {
@@ -312,4 +389,29 @@ const skillItem = ref([
   }
 }
 
+// @media screen and (max-height: 1000px) {
+//   .photo-bg {
+//     @apply w-[22vw];
+//   }
+//   .border-bottom {
+//     @apply bottom-32;
+//   }
+//   .title-menu {
+//     @apply mb-[17vh];
+//   }
+//   .area {
+//     @apply gap-3;
+//   }
+// }
+// @media screen and (max-height: 860px) {
+//   .photo-bg {
+//     @apply w-[19vw];
+//   }
+//   .border-bottom {
+//     @apply bottom-24;
+//   }
+//   .title-menu {
+//     @apply mb-[15vh];
+//   }
+// }
 </style>
