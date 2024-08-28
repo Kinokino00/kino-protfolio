@@ -6,6 +6,7 @@
   "_comment": "執行 npm run css -- light (請輸入 檔名=mode名)",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
     "deploy": "npm run build && node ./deploy/ghpages.js",
     "css": "node src/assets/style/variables/generateThemes.js"
   },
