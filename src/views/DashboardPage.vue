@@ -407,6 +407,17 @@ p {
 
   &-about {
     mask-image: none;
+    @apply px-4 2xl:px-10;
+  }
+}
+
+.certificates {
+  @apply absolute top-0 left-0 py-6 w-screen h-screen bg-black/50;
+  .close-icon {
+    @apply absolute left-6 top-6 w-7 h-7 cursor-pointer;
+  }
+  &-img {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[90vh];
   }
 }
 
