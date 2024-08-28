@@ -24,17 +24,17 @@
         </div>
 
         <div v-if="menuItems[1].active" class="area area-certificate">
-          <div class="area-line"></div>
+          <!-- <div class="area-line"></div> -->
           <div class="area-info">
-            <p class="area-info-label min-w-[88px]">Certificate</p>
+            <!-- <p class="area-info-label min-w-[88px]">Certificate</p> -->
             <div class="circle-detail">
-              <div class="circle"></div>
+              <!-- <div class="circle"></div> -->
               <div class="area-info-detail">
                 <img class="TQC" src="@/assets/images/TQC.png" alt="TQC">
-                <h2 class="text-xl">大數據分析專業人才</h2>
-                <p>軟體開發知識</p>
-                <p>網頁資料擷取與分析</p>
-                <p>基礎程式語言</p>
+                <h2 @click="isCertificate00Show = !isCertificate00Show">大數據分析專業人才</h2>
+                <p @click="isCertificate03Show = !isCertificate03Show">軟體開發知識</p>
+                <p @click="isCertificate02Show = !isCertificate02Show">網頁資料擷取與分析 Python3</p>
+                <p @click="isCertificate01Show = !isCertificate01Show">程式語言 Python3</p>
               </div>
             </div>
           </div>
@@ -70,15 +70,16 @@
 
         <div v-if="menuItems[4].active" class="area area-about">
           <p class="text-justify">
-            　　具備一年 Python 學習背景，會使用 Django 框架及 Selenium、BeautifulSoup 套件，懂資料庫基本操作，已取得 TQC 大數據分析專業人才證照。<br><br>
+            　　具備一年 Python 學習背景，已取得 TQC 大數據分析專業人才證照，懂資料庫基本操作。會使用 Django 框架及 Selenium、BeautifulSoup 套件。<br><br>
 
-            　　於前端專案中負責API串接，使用 Vue3 框架、TypeScript、Tailwindcss 和 Scss。此前參與了多個 APP 和 Web 專案的 UI 設計。<br><br>
+            　　於前端專案中負責切版與 API 串接，使用 Vue 框架、TypeScript、JavaScript、Tailwind、HTML、CSS 和 Scss。此前參與了多個 APP 和 Web 專案的 UI 設計。<br><br>
 
             　　於擔任營業處督導期間，負責行銷企劃、規劃執行、人員管理與溝通協作，這些經驗培養了我良好的團隊合作和溝通能力。擅長跨部門協作，能有效地與團隊成員合作，達成專案目標。<br><br>
 
             　　我性格謙和、樂觀且活潑，致力於成為一名圓融通達的專業人才。
           </p>
         </div>
+
 
         <div v-if="allActive" class="photo-bg-kino"></div>
       </div>
@@ -96,6 +97,13 @@
       </ul>
     </div>
     <div class="border-bottom"></div>
+  </div>
+  <div v-if="isCertificate00Show || isCertificate01Show || isCertificate02Show || isCertificate03Show" class="certificates" @click="isCertificateShowAll">
+    <img class="close-icon" src="@/assets/images/icon/xmark-solid.png" alt="關閉">
+    <img v-if="isCertificate00Show" class="certificates-img" src="@/assets/images/certificate/certificate00.jpg" alt="TQC 大數據分析專業人才">
+    <img v-if="isCertificate01Show" class="certificates-img" src="@/assets/images/certificate/certificate01.jpg" alt="TQC">
+    <img v-if="isCertificate02Show" class="certificates-img" src="@/assets/images/certificate/certificate02.jpg" alt="TQC">
+    <img v-if="isCertificate03Show" class="certificates-img" src="@/assets/images/certificate/certificate03.jpg" alt="TQC">
   </div>
 </template>
 
@@ -123,13 +131,11 @@ const menuItems = ref<MenuItem[]>([
   { label: 'Project & Side Project', active: false },
   { label: 'About Me', active: false }
 ])
-
 const activeMenu = (index:number) => {
   menuItems.value.forEach((menu, i) => {
     menu.active = i === index
   })
 }
-
 const allActive = computed(() => menuItems.value.every(menu => !menu.active))
 
 const certificateItem = ref<CertificateItem[]>([
@@ -212,6 +218,17 @@ const projectItem = ref([
     }]
   },
 ])
+
+const isCertificate00Show = ref(false)
+const isCertificate01Show = ref(false)
+const isCertificate02Show = ref(false)
+const isCertificate03Show = ref(false)
+const isCertificateShowAll = () => {
+  isCertificate00Show.value = false
+  isCertificate01Show.value = false
+  isCertificate02Show.value = false
+  isCertificate03Show.value = false
+}
 </script>
 
 
@@ -234,7 +251,7 @@ p {
 }
 .photo-bg {
   @apply transition-all overflow-hidden;
-  @apply w-[100vw] sm:w-[60vw] md:w-[48vw] lg:w-[40vw] xl:w-[20vw] 2xl:w-[30vw] 3xl:w-[26vw];
+  @apply w-[100vw] sm:w-[60vw] md:w-[48vw] lg:w-[25vw] xl:w-[20vw] 2xl:w-[30vw] 3xl:w-[26vw];
 
   &-inner {
     @apply relative flex flex-col items-center justify-center;
@@ -281,6 +298,7 @@ p {
   }
 
   &-work {
+    @apply px-3;
     .area-line {
       @apply top-4 left-[73px] 2xl:left-[77px];
     }
@@ -289,25 +307,35 @@ p {
   &-certificate {
     @apply relative whitespace-nowrap;
     .area {
-      &-line {
-        @apply top-10       xl:top-3;
-        @apply left-[146px] xl:left-[15px];
-      }
+      // &-line {
+      //   @apply xl:top-10       top-3;
+      //   @apply xl:left-[146px] left-[15px];
+      // }
       &-info {
-        @apply xl:flex-col xl:gap-0;
-        &-label {
-          @apply -top-7 xl:top-0 xl:left-5;
-        }
+        @apply flex-col gap-0;
+        // &-label {
+        //   @apply xl:-top-7 top-0 left-5;
+        // }
         &-detail {
-          @apply xl:ml-4;
+          @apply ml-4;
+          h2, p {
+            text-decoration: underline;
+            @apply cursor-pointer hover:text-white/60;
+          }
+          h2 {
+            @apply text-xl underline-offset-4;
+          }
+          p {
+            @apply underline-offset-2;
+          }
         }
       }
     }
-    .circle {
-      @apply -top-7 xl:-top-4;
-    }
+    // .circle {
+    //   @apply xl:-top-7 -top-4;
+    // }
     .TQC {
-      @apply w-[140px] xl:w-[120px];
+      @apply xl:w-[140px] w-[120px];
     }
   }
 
@@ -325,7 +353,7 @@ p {
     }
     .area {
       &-line {
-        @apply left-[111px] 2xl:left-[206px];
+        @apply left-[140px] xl:left-[112px] 2xl:left-[179px];
         @apply top-4 2xl:top-5;
       }
       &-info {
@@ -361,7 +389,7 @@ p {
   &-project {
     .area {
       &-line {
-        @apply top-4 2xl:top-5 left-[113px] 2xl:left-[186px];
+        @apply top-4 2xl:top-5 left-[142px] xl:left-[113px] 2xl:left-[157px];
       }
       &-info {
         &-label {
@@ -376,6 +404,17 @@ p {
 
   &-about {
     mask-image: none;
+    @apply px-4 xl:px-10;
+  }
+}
+
+.certificates {
+  @apply absolute top-0 left-0 py-6 w-screen h-screen bg-black/50;
+  .close-icon {
+    @apply absolute left-6 top-6 w-7 h-7 cursor-pointer;
+  }
+  &-img {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[90vh];
   }
 }
 
