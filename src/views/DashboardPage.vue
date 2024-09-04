@@ -59,10 +59,16 @@
           <div class="area-info" v-for="projects in projectItem" :key="projects.label">
             <p class="area-info-label">{{ projects.label }}</p>
             <div class="circle"></div>
-            <div class="grid gap-1.5 gap-3">
+            <div class="grid gap-1.5 2xl:gap-3">
               <div class="area-info-detail" v-for="(project,i) in projects.text" :key="i">
                 <p v-if="project.year" class="font-num">{{ project.year }}</p>
-                <p class="text-base">{{ project.name }}</p>
+                <a
+                  :href="project.web"
+                  :class="{ 'underline hover:opacity-70': project.web }"
+                  target="_blank"
+                >
+                  <p class="text-base">{{ project.name }}</p>
+                </a>
               </div>
             </div>
           </div>
@@ -207,13 +213,15 @@ const projectItem = ref([
         name: '龍奉宮'
       }, {
         year: 2020,
-        name: '台灣新計畫有限公司'
+        name: '台灣新計畫有限公司',
+        web: 'https://rabbitsos.ttoper.com/'
     }]
   }, {
     label: 'Front-end & UI',
     text: [{
         year: 2022,
-        name: '樺晟科技股份有限公司'
+        name: '樺晟科技股份有限公司',
+        web: 'https://robodencable.com/zh/'
       }, {
         year: 2022,
         name: 'Ttoper'
