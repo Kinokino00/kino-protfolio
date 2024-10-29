@@ -41,44 +41,53 @@
         </div>
 
         <div v-if="menuItems[2].active" class="area area-skill">
-          <div class="area-line"></div>
-          <div class="area-info" v-for="skills in skillItem" :key="skills.label">
-            <p class="area-info-label">{{ skills.label }}</p>
-            <div class="circle"></div>
-            <div class="grid gap-1.5 2xl:gap-3">
-              <div class="area-info-detail" v-for="(skill,i) in skills.text" :key="i">
-                <i :class="skill"></i>
-                <p>{{ skill }}</p>
-              </div>
-            </div>
+          <div class="grid">
+            <div class="title-a">前端技能</div>
+            <ol>
+              <li>Vue3.js 前端框架並結合 PrimeVue 之 UI 組件庫</li>
+              <li>Scss + Tailwindcss 之 CSS 框架規劃 RWD 響應式網頁</li>
+              <li>HTML、CSS、JavaScript、TypeScript 動態互動網頁版面設計</li>
+              <li>運用 axios 進行 API 串接與 CRUD 功能實作</li>
+            </ol>
+          </div>
+          <div class="grid">
+            <div class="title-a">後端技能</div>
+            <ol>
+              <li>SQL 資料庫語法</li>
+              <li>Python 資料分析與爬蟲</li>
+              <li>Java</li>
+            </ol>
           </div>
         </div>
 
         <div v-if="menuItems[3].active" class="area area-project">
-          <div class="area-line"></div>
-          <div class="area-info" v-for="projects in projectItem" :key="projects.label">
-            <p class="area-info-label">{{ projects.label }}</p>
-            <div class="circle"></div>
-            <div class="grid gap-1.5 2xl:gap-3">
-              <div class="area-info-detail" v-for="(project,i) in projects.text" :key="i">
-                <p v-if="project.year" class="font-num">{{ project.year }}</p>
-                <a
-                  :href="project.web"
-                  :class="{ 'underline hover:opacity-70': project.web }"
-                  target="_blank"
-                >
-                  <p class="text-base">{{ project.name }}</p>
-                </a>
-              </div>
-            </div>
+          <div class="grid">
+            <a class="title-a" href="https://gems-tw-enterprise-se.ew-demo.com/" target="_blank">智慧能源管理監控系統</a>
+            <ol>
+              <li>響應式介面 - 利用 Scss + Tailwindcss 之 CSS 框架規劃</li>
+              <li>圖形化報表 - amChart.js 設計能源分析比較圖表</li>
+              <li>表單動態驗證 - 以 Yup 之 JavaScript 架構構建器於前端先行匹配 API 之 Payload</li>
+              <li>動畫 - 運用 Lottie Animation 製作動態畫面</li>
+            </ol>
           </div>
+          <div class="grid">
+            <a class="title-a" href="https://ghg-test.ewqa.cc/" target="_blank">組織型溫室氣體盤查平台</a>
+            <ul>
+              <li>i18n 多國語系設定與運用</li>
+            </ul>
+          </div>
+          <div class="grid">
+            <a class="title-a" href="https://cfv.ew-demo.com/" target="_blank">產品碳足跡計算平台</a>
+            <ul>
+              <li>i18n 多國語系設定與運用</li>
+            </ul>
+          </div>
+          <div class="title-a" style="text-decoration: none;">SmartSOS 智慧對講門禁求救系統 APP</div>
         </div>
 
         <div v-if="menuItems[4].active" class="area area-about">
           <p class="text-justify">
-            　　具備一年 Python 學習背景，已取得 TQC 大數據分析專業人才證照，懂資料庫基本操作。會使用 Django 框架及 Selenium、BeautifulSoup 套件。<br><br>
-
-            　　於前端專案中負責切版與 API 串接，使用 Vue 框架、TypeScript、JavaScript、Tailwind、HTML、CSS 和 Scss。此前參與了多個 APP 和 Web 專案的 UI 設計。<br><br>
+            　　具備兩年前端經驗，於 Vue.js 前端框架專案中負責規劃 RWD 響應式網頁，並進行 API 串接與 CRUD 功能實作。<br><br>
 
             　　於擔任營業處督導期間，負責行銷企劃、規劃執行、人員管理與溝通協作，這些經驗培養了我良好的團隊合作和溝通能力。擅長跨部門協作，能有效地與團隊成員合作，達成專案目標。<br><br>
 
@@ -134,7 +143,7 @@ const menuItems = ref<MenuItem[]>([
   { label: 'Work Experience', active: false },
   { label: 'Certificate', active: false },
   { label: 'Skill', active: false },
-  { label: 'Project & Side Project', active: false },
+  { label: 'Project Experience', active: false },
   { label: 'About Me', active: false }
 ])
 const activeMenu = (index:number) => {
@@ -318,15 +327,8 @@ p {
     mask-image: none;
     @apply relative whitespace-nowrap;
     .area {
-      // &-line {
-      //   @apply xl:top-10       top-3;
-      //   @apply xl:left-[146px] left-[15px];
-      // }
       &-info {
         @apply flex-col gap-0;
-        // &-label {
-        //   @apply xl:-top-7 top-0 left-5;
-        // }
         &-detail {
           @apply ml-4;
           h2, p {
@@ -342,75 +344,26 @@ p {
         }
       }
     }
-    // .circle {
-    //   @apply xl:-top-7 -top-4;
-    // }
     .TQC {
       @apply xl:w-[140px] w-[120px];
     }
   }
 
   &-skill, &-project {
-    .area-info-label {
-      @apply text-base 2xl:text-lg;
-      @apply leading-5 2xl:leading-7;
+    @apply gap-3 px-7;
+    ol {
+      list-style: auto !important;
+      letter-spacing: 1px;
+      @apply pl-4;
     }
   }
 
   &-skill {
-    @apply gap-3 2xl:gap-8;
-    .circle, .area-info-label {
-      @apply -top-2 2xl:-top-3;
-    }
-    .area {
-      &-line {
-        @apply left-[140px] xl:left-[112px] 2xl:left-[179px];
-        @apply top-4 2xl:top-5;
-      }
-      &-info {
-        &:nth-last-of-type(2), &:nth-last-of-type(1) {
-          .area-info-label {
-            @apply 2xl:-top-5;
-          }
-        }
-        &-label {
-          @apply max-w-[88px] min-w-[88px] 2xl:min-w-[152px];
-        }
-        &-detail {
-          @apply flex-row items-center gap-1;
-          i {
-            @apply bg-no-repeat bg-center bg-contain;
-            @apply w-6 2xl:w-9;
-            @apply h-6 2xl:h-9;
-            $skills: 'Python', 'django', 'Selenium', 'BeautifulSoup','HTML', 'CSS', 'Vue', 'Javascript', 'Typescript', 'Figma', 'Illustrator', 'Photoshop';
-            @each $skill in $skills {
-              &.#{$skill} {
-                background-image: url('@/assets/images/icon/#{$skill}.png');
-              }
-            }
-            &.BeautifulSoup {
-              @apply w-[40px] 2xl:w-[72px];
-            }
-          }
-        }
-      }
-    }
+    @apply 2xl:gap-8;
   }
-
+  
   &-project {
-    .area {
-      &-line {
-        @apply top-4 2xl:top-5 left-[142px] xl:left-[113px] 2xl:left-[157px];
-      }
-      &-info {
-        &-label {
-          @apply max-w-[90px] min-w-[90px] 2xl:min-w-[130px];
-        }
-        &-detail {
-          @apply gap-0 2xl:gap-1;
-        }
-      }
-    }
+    @apply 2xl:gap-5;
   }
 
   &-about {
@@ -447,6 +400,11 @@ p {
     @apply absolute right-5 leading-[90%] opacity-10;
     @apply top-3 xl:top-6 2xl:top-5;
     @apply text-[60px] md:text-[70px] 2xl:text-[110px];
+  }
+
+  &-a {
+    @apply mb-1 text-xl font-bold underline-offset-2;
+    text-decoration: underline;
   }
 }
 .menu {
